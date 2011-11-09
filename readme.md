@@ -6,30 +6,29 @@ This is a Python clone of the **wtf** sh script from NetBSD, the special acronym
 It's based on the original <a href="http://cvsweb.de.netbsd.org/cgi-bin/cvsweb.cgi/src/games/wtf/">**wtf** sh script</a>, and also uses the same main acronym database, which is very rich and complete :)
 
 ## Installation
-To install this clone of **wtf**, just run:
-`curl raw.github.com/link | sh`
+To install this clone of **wtf**, just run:<br>
+`$ curl https://raw.github.com/theiostream/wtf/master/install/get.sh | sh`
 
-To build from source:
-`$ git clone git://git.github.com/theiostream/wtf.git`
-`$ ./wtf/install/install.sh`
+To get the source:<br>
+`$ git clone git://github.com/theiostream/wtf.git`
 
 The `install.sh` script will put **wtf** inside */usr/bin*, and will rename any other file named *<b>wtf</b>* to *wtf-old*.
 
 ## Usage
-Dead simple:
+Dead simple:<br>
 `$ wtf [-f dbfile / -d dbdir] [is] <acronym>`
 
-For more detail on usage, refer to the manual:
+For more detail on usage, refer to the manual:<br>
 `$ man 6 wtf-py`
 
 ## Creating a dbfile
 It is extremely basic: It is basically:
 <pre>
-`ACRONYM	meaning
-`ANOTHERACR	meaning`
+ACRONYM     meaning
+ANOTHERACR  meaning
 </pre>
 
-As you can see, using both `\t` and ` ` is valid to split acronym and meaning. But note that if you choose to use ` ` as a separator, you can't use `\t` in a part of the package description.
+As you can see, using both `\t` and `SPACE` is valid to split acronym and meaning. But note that if you choose to use `SPACE` as a separator, you can't use `\t` in a part of the package description.
 
 Also note that all acronyms should be written in *CAPS*.
 
@@ -49,6 +48,9 @@ There are many advantages on using this port of **wtf**. These are the main ones
 The original version of **wtf** searches into *pkg_info*'s database, and into *pkgsrc*'s help facility. That isn't available on most non-BSD operating systems, so this clone lacks looking into it.
 
 That should weight plenty to you if you are a BSD user. If so I'd stick with the original script.
+
+## On development
+* The `-t` flag, which would select only ADBs from certain extension (such as `.comp`)
 
 ## Credits
 * The NetBSD folks, who made:
