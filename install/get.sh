@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git clone git://git.github.com/theiostream/wtf.git
+git clone git://github.com/theiostream/wtf.git
 
 chmod 755 ./install.py
 sudo ./install.py
