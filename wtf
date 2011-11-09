@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+
+'''
+wtf -- the best internet acronyms translator
+
+Licensed under WTFPL v2.0
+'''
+
+import os
+import subprocess
+from optparse import OptionParser, SUPPRESS_HELP
+	
+def notfound(acr):
+	print '[wtf] I don\'t know what %s means!' % acr
+	exit(1)
+	
+def doesntexist(f):
+	print '[wtf] %s doesn\'t exist' % f
+	exit(2)
+	
+def findacr(fname, acr):
+	dbacrs = open(fname, 'r').read().split('\n')
+	
+	for a in dbacrs:
+		if a.find('\t')!=-1: spl = '\t'
+		else: spl = ' '
+		
+		l = a.split(spl, 1)
+		if l[0]==acr.upper():
+			print acr+': '+l[1]; exit(0)
+			
+	for c in subprocess.check_output(['whatis', acr]).split('\n'):
+		a = c.split('(')[0]
+		if a==acr:
+			print c
+			exit(0)
+	
+	notfound(acr)
+	
+def main():
+	parser = OptionParser(usage='usage: %prog [-f dbfile / -d dbdir] [is] <acronym>', add_help_option=False)
+	parser.add_option('-f', '--dbfile', dest='dbfile', help=SUPPRESS_HELP)
+	parser.add_option('-d', '--dbdir', dest='dbdir', help=SUPPRESS_HELP)
+	(options, args) = parser.parse_args()
+	
+	if not args:
+		parser.error('specify an option')
+	
+	if options.dbfile and options.dbdir:
+		parser.error('options -f and -d can\'t be used together')
+	
+	if options.dbfile:
+		if os.path.exists(options.dbfile): findacr(options.dbfile, args[len(args)-1])
+		else: doesntexist(options.dbfile)
+	
+	if options.dbdir:
+		if os.path.exists(options.dbdir): dir = options.dbdir
+		else: doesntexist(options.dbdir)
+	else: dir = '/Library/wtf/lists/'
+	
+	for file in os.listdir(dir):
+		findacr(dir+'/'+file, args[len(args)-1])
+
+# Start it all!
+main()
