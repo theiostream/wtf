@@ -51,6 +51,7 @@ That should weight plenty to you if you are a BSD user. If so I'd stick with the
 
 ## On development
 * The `-t` flag, which would select only ADBs from certain extension (such as `.comp`)
+* The `wtf-py` man page
 
 ## Credits
 * The NetBSD folks, who made:
