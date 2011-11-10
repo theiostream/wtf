@@ -9,7 +9,10 @@ for e in check_output('echo $PATH', shell=True).rstrip('\n').split(':'):
 		shutil.move(e+'/wtf', e+'/wtf-old')
 
 if not os.path.exists('/Library/wtf/'):
-	shutil.copytree('./wtf', '/Library/wtf')
+	os.makedirs('/Library/wtf')
+
+# Update the adbs
+shutil.copytree('../adb', '/Library/wtf/lists')
 
 os.chmod('../wtf', 0755)	
 shutil.copy('../wtf', '/usr/bin/')
