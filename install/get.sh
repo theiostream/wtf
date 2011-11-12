@@ -2,7 +2,8 @@
 
 git clone git://github.com/theiostream/wtf.git
 
-chmod 755 ./wtf/install/install.py
-sudo ./wtf/install/install.py
+cd wtf/install
+chmod 755 ./install.py
+sudo ./install.py
 
 sudo rm -rf ./wtf
