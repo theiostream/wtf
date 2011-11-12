@@ -12,6 +12,9 @@ if not os.path.exists('/Library/wtf/'):
 	os.makedirs('/Library/wtf')
 
 # Update the adbs
+if os.path.exists('/Library/wtf/lists'):
+	shutil.rmtree('/Library/wtf/lists')
+
 shutil.copytree('../adb', '/Library/wtf/lists')
 
 os.chmod('../wtf', 0755)	
