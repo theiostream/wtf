@@ -27,16 +27,16 @@ def findacr(fname, acr):
 		
 		l = a.split(spl, 1)
 		if l[0]==acr.upper():
-			print acr+': '+l[1]; exit(0)
-			
+			print acr+': '+l[1]
+			exit(0)
+
+def begForWhatis(acr):
 	for c in subprocess.check_output(['whatis', acr]).split('\n'):
 		a = c.split('(')[0]
 		if a==acr:
 			print c
 			exit(0)
-	
-	notfound(acr)
-	
+
 def main():
 	parser = OptionParser(usage='usage: %prog [-f dbfile / -d dbdir] [is] <acronym>', add_help_option=False)
 	parser.add_option('-f', '--dbfile', dest='dbfile', help=SUPPRESS_HELP)
@@ -59,7 +59,10 @@ def main():
 	else: dir = '/Library/wtf/lists/'
 	
 	for file in os.listdir(dir):
-		findacr(dir+'/'+file, args[len(args)-1])
+		findacr(dir+'/'+file, args[-1])
+		
+	begForWhatis(args[-1])
+	notfound(args[-1])
 
 # Start it all!
 main()
